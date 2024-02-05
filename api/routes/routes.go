@@ -2,6 +2,7 @@
 package routes
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -22,4 +23,9 @@ func APIEndpoint1Handler(w http.ResponseWriter, r *http.Request) {
 // APIEndpoint2Handler handles requests to /api/endpoint2.
 func APIEndpoint2Handler(w http.ResponseWriter, r *http.Request) {
 	// Your logic for handling /api/endpoint2
+}
+
+// HomeHandler handles requests to the home page.
+func HomeHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hello, Backend!")
 }

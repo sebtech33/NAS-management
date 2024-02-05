@@ -6,22 +6,24 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gorilla/mux"
 	"github.com/sebtech33/NAS-management/api/routes"
 )
 
 func main() {
-	mux := http.NewServeMux()
+	// Initialize a new Gorilla Mux router
+	r := mux.NewRouter()
 
 	// Register API routes
-	routes.RegisterAPIRoutes(mux)
+	routes.RegisterAPIRoutes(r)
 
 	// Serve static files
-	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("web/static"))))
+	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("web/static"))))
 
 	// Serve HTML templates
-	mux.HandleFunc("/", routes.HomeHandler)
+	r.HandleFunc("/", routes.HomeHandler)
 
 	port := ":8080"
 	fmt.Printf("Server listening on %s\n", port)
-	log.Fatal(http.ListenAndServe(port, mux))
+	log.Fatal(http.ListenAndServe(port, r))
 }
