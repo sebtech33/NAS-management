@@ -1,4 +1,3 @@
-// cmd/mywebapp/main.go
 package main
 
 import (
@@ -13,14 +12,16 @@ import (
 func main() {
 	r := mux.NewRouter()
 
-	// Register API routes
-	routes.RegisterAPIRoutes(r)
-
 	// Serve static files
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("web/static"))))
 
 	// Serve HTML templates
-	r.HandleFunc("/", routes.HomeHandler)
+	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "web/templates/index.html")
+	})
+
+	// Register API routes
+	routes.RegisterAPIRoutes(r)
 
 	port := ":8080"
 	fmt.Printf("Server listening on %s\n", port)

@@ -1,22 +1,22 @@
 /* web/static/style.css */
 #tabs {
-    overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
+    display: flex;
+    background-color: #333;
 }
 
 #tabs button {
-    background-color: inherit;
-    float: left;
+    background-color: #444;
+    color: white;
     border: none;
     outline: none;
     cursor: pointer;
     padding: 14px 16px;
-    transition: 0.3s;
+    flex: 1;
+    transition: background-color 0.3s;
 }
 
 #tabs button:hover {
-    background-color: #ddd;
+    background-color: #555;
 }
 
 .tab-content {

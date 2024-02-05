@@ -25,5 +25,26 @@
         <!-- Add more tab content as needed -->
     </div>
     <script src="/static/script.js"></script>
+<script src="/static/script.js"></script>
+<script>
+    async function fetchContainers() {
+        const response = await fetch('/api/endpoint1');
+        const containers = await response.json();
+
+        // Update the UI with the list of containers
+        const containerList = document.getElementById('container-list');
+        containerList.innerHTML = '<h2>Docker Containers</h2>';
+
+        containers.forEach(container => {
+            const containerInfo = document.createElement('div');
+            containerInfo.innerHTML = `<p>${container.ID}: ${container.Names.join(', ')}</p>`;
+            containerList.appendChild(containerInfo);
+        });
+    }
+
+    // Call the fetchContainers function when the page loads
+    window.onload = fetchContainers;
+</script>
+
 </body>
 </html>
