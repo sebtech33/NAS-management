@@ -11,7 +11,6 @@ import (
 )
 
 func main() {
-	// Initialize a new Gorilla Mux router
 	r := mux.NewRouter()
 
 	// Register API routes
